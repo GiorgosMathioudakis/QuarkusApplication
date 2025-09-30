@@ -34,6 +34,21 @@ public class MovieResource {
     }
 
 
+    @PUT
+    @Path("{movieToUpdate}")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.TEXT_PLAIN)
+    public Response updateMovie(
+            @PathParam("movieToUpdate") String movieToUpdate,
+            @QueryParam("movie") String newMovie) {
+        if (movies.contains(movieToUpdate)) {
+            movies.remove(movieToUpdate);
+            movies.add(newMovie);
+            return Response.status(Response.Status.OK).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
 
     @DELETE
     @Path("/{movie}")
