@@ -10,10 +10,10 @@ import java.util.List;
 @Path("/movies")
 public class MovieResource {
 
-    public static List<String> movies = new ArrayList<>();
+    public static List<Movie> movies = new ArrayList<>();
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getMovies() {
         return Response.ok(movies).build();
     }
@@ -26,14 +26,14 @@ public class MovieResource {
     }
 
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
-    @Consumes(MediaType.TEXT_PLAIN)
-    public Response addMovie(String movie) {
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addMovie(Movie movie) {
         movies.add(movie);
-        return Response.status(Response.Status.CREATED).build();
+        return Response.ok(movies).build();
     }
 
-
+/*
     @PUT
     @Path("{movieToUpdate}")
     @Produces(MediaType.TEXT_PLAIN)
@@ -46,7 +46,7 @@ public class MovieResource {
             movies.add(newMovie);
             return Response.status(Response.Status.OK).build();
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
 
@@ -61,4 +61,6 @@ public class MovieResource {
         return Response.status(Response.Status.NO_CONTENT).build();
 
     }
+
+ */
 }
